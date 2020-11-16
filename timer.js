@@ -10,14 +10,22 @@ function startButtonClick() {
     let curSecValue = document.getElementById("s").value || 0;
     addToDebug("start clock with timeValues:" + curMinValue + ":" + curSecValue);
     timer = new Timer();
+    timer.addEventListener('targetAchieved', function (e) {
+        var messageSpan = document.getElementById("messageSpan");
+        messageSpan.innerHTML = "Time's up";
+        var messageDiv = document.getElementById("messages");
+        messageDiv.classList.remove("hide");        
+    });
+
+    timer.addEventListener('secondsUpdated', function (e) {
+        document.getElementById("timerBox").innerHTML = timerValuemmss();    
+    });
+
     timer.start({countdown: true, startValues: {
         minutes: parseInt(curMinValue, 10),
         seconds: parseInt(curSecValue, 10)
     }});
 
-    timer.addEventListener('secondsUpdated', function (e) {
-        document.getElementById("timerBox").innerHTML = timerValuemmss();    
-    });
 }
 
 function timerValuemmss() {
