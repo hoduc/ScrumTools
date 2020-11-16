@@ -82,13 +82,17 @@ function standupButtonClick() {
 
 
 function disableClockSelectors() {
-    disableInput("m");
-    disableInput("s");
+    disableElem("m");
+    disableElem("s");
+    disableElem("start");
+    disableElem("rangeCalc")
 }
 
 function enableClockSelectors() {
-    enableInput("m");
-    enableInput("s");
+    enableElem("m");
+    enableElem("s");
+    enableElem("start");
+    enableElem("rangeCalc");
 }
 
 function resetClockSelectors() {
@@ -98,13 +102,14 @@ function resetClockSelectors() {
     secInput.value = secInput.getAttribute("placeholder");
 }
 
-function disableInput(inputId, disableState = true) {
-    var inputElem = document.getElementById(inputId);
-    inputElem.disabled = disableState;
+function disableElem(inputId, disableState = true) {
+    var elem = document.getElementById(inputId);
+    addToDebug(inputId + "to be:" + disableState);
+    elem.disabled = disableState;
 }
 
-function enableInput(inputId) {
-    disableInput(inputId, false);
+function enableElem(inputId) {
+    disableElem(inputId, false);
 }
 
 function inspoButtonClick() {
