@@ -14,8 +14,8 @@
   ],
   "author": "hoduc",
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/hoduc/ScrumTools"
+    "type": "git",
+    "url": "https://github.com/hoduc/ScrumTools"
   },
   "license": "CC0-1.0",
   "devDependencies": {
