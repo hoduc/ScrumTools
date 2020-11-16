@@ -25,7 +25,18 @@ function startButtonClick() {
         minutes: parseInt(curMinValue, 10),
         seconds: parseInt(curSecValue, 10)
     }});
+}
 
+function rangeCalcButtonClick() {
+    var m = document.getElementById("m");
+    var s = document.getElementById("s");
+    var m2 = document.getElementById("m2").value;
+    var m1 = document.getElementById("m1").value;
+    var s2 = document.getElementById("s2").value;
+    var s1 = document.getElementById("s1").value;
+    // TODO: validation
+    m.value = abs(parseInt(m2) - parseInt(m1));
+    s.value = abs(parseInt(s2) - parseInt(s1));  
 }
 
 function timerValuemmss() {
@@ -126,3 +137,4 @@ document.getElementById("stop").addEventListener("click", stopButtonClick);
 document.getElementById("reset").addEventListener("click", resetButtonClick);
 document.getElementById("standup").addEventListener("click", standupButtonClick);
 document.getElementById("inspo").addEventListener("click", inspoButtonClick);
+document.getElementById("rangeCalc").addEventListener("click", rangeCalcButtonClick);
