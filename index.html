@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+    <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+    <title>Doc Ho Scrum Tools(DHST)</title>
+  </head>
+  <body>
+    <div id="timer">
+      <div id="timerSelectBox">
+        <input id="m" type="number" min="0" max="24" placeholder="0"/>
+        <span>Minutes</span>
+        <input id="s" type="number" min="0" max="59" placeholder="0"/>
+        <span>Seconds</span>
+      </div>
+      <div>
+      <div id="buttons">
+        <button id="start">Start</button>
+        <button id="pause">Pause</button>
+        <button id="stop">Stop</button>
+        <button id="reset">Reset</button>
+        <button id="standup">Standup(3 minutes)</button>
+        <div id="calculator">
+          <div id="fromCalculator" class="left">
+            <input id="h1" type="number" min="0" max="24" placeholder="0"/>
+            <span>Hour</span>
+            <input id="m1" type="number" min="0" max="24" placeholder="0"/>
+            <span>Minutes</span>
+            <input id="s1" type="number" min="0" max="59" placeholder="0"/>
+            <span>Seconds</span>
+          </div>
+          <div id="toCalculator" class="right">
+            <input id="h2" type="number" min="0" max="24" placeholder="0"/>
+            <span>Hour</span>
+            <input id="m2" type="number" min="0" max="24" placeholder="0"/>
+            <span>Minutes</span>
+            <input id="s2" type="number" min="0" max="59" placeholder="0"/>
+            <span>Seconds</span>
+          </div>
+          <span class="right">
+            <button>Calculate Range!!!</button>
+          </span>
+        </div>
+      </div>
+      <div id="timerBox"></div>
+    </div>
+
+    <hr>
+    <div id="qotd">
+      <button id="inspo">Inspire Quote!</button>
+      <p class="blockquote hide" id="quoteContent"></p>
+    </div>
+
+    <hr>
+    <div id="about">
+      <span>
+      </span>
+    </div>
+
+    <div id="debug" class="hide">
+      <textarea disabled id="debugConsole"></textarea>
+    </div>
+
+    <!-- You can also require other files to run in this process -->
+    <script src="./renderer.js"></script>
+    <script src="./timer.js"></script>
+    <link rel="stylesheet" href="./timer.css">
+  </body>
+</html>

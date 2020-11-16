@@ -1,0 +1,68 @@
+body {
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+textarea {
+    overflow-y:scroll;
+    resize: none;
+    height: 100px;
+}
+
+.hide {
+    display:none;
+}
+
+.blockquote {
+    background: #f9f9f9;
+    border-left: 10px solid #ccc;
+    margin: 1.5em 10px;
+    padding: 0.5em 10px;
+    quotes: "\201C""\201D""\2018""\2019";
+}
+
+.blockquote:before {
+    color: #ccc;
+    content: open-quote;
+    font-size: 4em;
+    line-height: 0.1em;
+    margin-right: 0.25em;
+    vertical-align: -0.4em;
+}
+
+#left {
+    float: left;
+}
+
+#right {
+    display: block;
+    font-size: medium;
+}
+
+#about span img {
+    float: left;
+}
+
+#about span small {
+    display: block;
+    font-size: medium;
+}
+
+.blockquote p {
+    display: inline;
+}
+
+#timerSelectBox {
+    font-family: 'Orbitron', sans-serif;
+}
+
+#timerBox {
+    font-family: 'Orbitron', sans-serif;
+    color: darkorange;
+    font-size: 800%;
+}
+
+@font-face {
+    font-family: Orbitron;
+    src: url('Orbitron.ttf');
+}

@@ -1,0 +1,29 @@
+{
+  "name": "electron-scrum-tool",
+  "version": "1.0.0",
+  "description": "Duc Ho Scrum tool",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "keywords": [
+    "Electron",
+    "ducho",
+    "scrum",
+    "tool"
+  ],
+  "author": "hoduc",
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/hoduc/ScrumTools"
+  },
+  "license": "CC0-1.0",
+  "devDependencies": {
+    "electron": "^10.1.5"
+  },
+  "dependencies": {
+    "easytimer.js": "^4.3.0",
+    "https": "^1.0.0",
+    "request": "^2.88.2"
+  }
+}
