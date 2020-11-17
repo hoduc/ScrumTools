@@ -1,8 +1,12 @@
 
 const request = require('request');
 var { Timer } = require('easytimer.js');
+var howler = require('howler');
 
 var timer = new Timer();
+var bleep_sound = new howler.Howl({
+    src: ['bleep.mp3']
+});
 
 function startButtonClick() {
     disableClockSelectors();
@@ -18,6 +22,7 @@ function startButtonClick() {
     });
 
     timer.addEventListener('secondsUpdated', function (e) {
+        bleep_sound.play();
         document.getElementById("timerBox").innerHTML = timerValuemmss();    
     });
 
