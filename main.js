@@ -5,7 +5,7 @@ const path = require('path')
 function createWindow () {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 360,
+    width: 470,
     height: 700,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
@@ -18,7 +18,7 @@ function createWindow () {
   // and load the index.html of the app.
   mainWindow.loadFile('index.html');
 
-  mainWindow.setResizable(false);
+  // mainWindow.setResizable(false);
   
   mainWindow.setAlwaysOnTop(true);
 

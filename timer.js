@@ -45,7 +45,14 @@ function rangeCalcButtonClick() {
 }
 
 function timerValuemmss() {
-    return timer.getTimeValues().minutes + ":" + timer.getTimeValues().seconds;
+    var minutes = prependZeroOnSingleDigit(timer.getTimeValues().minutes);
+    var seconds = prependZeroOnSingleDigit(timer.getTimeValues().seconds);
+    addToDebug(minutes + ":" + seconds);
+    return minutes + ":" + seconds;
+}
+
+function prependZeroOnSingleDigit(value) {    
+    return value < 10 ? "0" + value : value;
 }
 
 function stopButtonClick() {
