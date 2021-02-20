@@ -1,19 +1,24 @@
 // Modules to control application life and create native browser window
-const {app, ipcRenderer, BrowserWindow} = require('electron')
+const {app, ipcRenderer, BrowserWindow, screen} = require('electron')
 const path = require('path')
 
 function createWindow () {
-  // Create the browser window.
+
+  // https://github.com/electron/electron/blob/master/docs/api/screen.md
+  const mousePoint = screen.getCursorScreenPoint()
+  const display = screen.getDisplayNearestPoint(mousePoint)
+
   const mainWindow = new BrowserWindow({
     width: 470,
     height: 700,
+    x: display.bounds.x + 50,
+    y: display.bounds.y + 50,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       nodeIntegration: true,
       enableRemoteModule: true
     }
   })
-  
 
   // and load the index.html of the app.
   mainWindow.loadFile('index.html');
