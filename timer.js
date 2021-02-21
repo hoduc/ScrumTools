@@ -35,13 +35,19 @@ function startButtonClick() {
 function rangeCalcButtonClick() {
     var m = document.getElementById("m");
     var s = document.getElementById("s");
-    var m2 = document.getElementById("m2").value;
-    var m1 = document.getElementById("m1").value;
-    var s2 = document.getElementById("s2").value;
-    var s1 = document.getElementById("s1").value;
+    var m2 = document.getElementById("m2").value || 0;
+    var m1 = document.getElementById("m1").value || 0 ;
+    var s2 = document.getElementById("s2").value || 0;
+    var s1 = document.getElementById("s1").value || 0;
     // TODO: validation
-    m.value = abs(parseInt(m2) - parseInt(m1));
-    s.value = abs(parseInt(s2) - parseInt(s1));  
+    var minutesDiff = Math.abs(parseInt(m2, 10) - parseInt(m1, 10));
+    var secondsDiff = Math.abs(parseInt(s2, 10) - parseInt(s1, 10));
+    addToDebug("(m1:s1) => " + m1 + ":" + s1);
+    addToDebug("(m2:s2) => " + m2 + ":" + s2);
+    addToDebug("minutes diff:" + minutesDiff);
+    addToDebug("seconds diff:" + secondsDiff);
+    m.value = minutesDiff;
+    s.value = secondsDiff;  
 }
 
 function timerValuemmss() {
