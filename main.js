@@ -1,6 +1,8 @@
 // Modules to control application life and create native browser window
-const {app, ipcRenderer, BrowserWindow, screen} = require('electron')
+const {app, BrowserWindow, screen} = require('electron')
 const path = require('path')
+
+var DEBUG = process.argv.slice(-1)[0] == "debug" || false;
 
 function createWindow () {
 
@@ -18,7 +20,7 @@ function createWindow () {
       nodeIntegration: true,
       enableRemoteModule: true
     }
-  })
+  })  
 
   // and load the index.html of the app.
   mainWindow.loadFile('index.html');
@@ -28,7 +30,9 @@ function createWindow () {
   mainWindow.setAlwaysOnTop(true);
 
   // Open the DevTools.
-  // mainWindow.webContents.openDevTools()
+  if (DEBUG) {
+    mainWindow.webContents.openDevTools();
+  }
 }
 
 // This method will be called when Electron has finished

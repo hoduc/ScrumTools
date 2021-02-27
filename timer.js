@@ -3,6 +3,8 @@ const request = require('request');
 var { Timer } = require('easytimer.js');
 var howler = require('howler');
 
+var DEBUG = require('electron').remote.process.argv.slice(-1)[0] == "debug" || false;
+
 var timer = new Timer();
 var bleep_sound = new howler.Howl({
     src: ['bleep.mp3']
@@ -21,7 +23,7 @@ function startButtonClick() {
         var messageSpan = document.getElementById("messageSpan");
         messageSpan.innerHTML = "Time's up";
         var messageDiv = document.getElementById("messages");
-        messageDiv.classList.remove("hide");        
+        messageDiv.classList.remove("hide");      
     });
 
     timer.addEventListener('secondsUpdated', function (e) {        
@@ -140,14 +142,24 @@ function resetClockSelectors() {
 }
 
 function disableElem(inputId, disableState = true) {
-    var elem = document.getElementById(inputId);
-    addToDebug(inputId + "to be:" + disableState);
-    elem.disabled = disableState;
+    findElemByIdAndInvoke(inputId, function(elem){
+        addToDebug(inputId + "to be:" + disableState);
+        elem.disabled =disableState;
+    });
+
 }
 
 function enableElem(inputId) {
     disableElem(inputId, false);
 }
+
+function findElemByIdAndInvoke(inputId, onElem) {
+    var elem = document.getElementById(inputId);
+    if (elem) {
+        onElem(elem);
+    }
+}
+
 
 function inspoButtonClick() {
     request('https://quotes.rest/qod?category=inspire', { json: true }, (err, res, body) => {
@@ -169,8 +181,11 @@ function inspoButtonClick() {
 }
 
 function addToDebug(msg) {
-    var textArea = document.getElementById("debugConsole");
-    textArea.value += msg + "\n";
+    if (DEBUG) {
+        findElemByIdAndInvoke("debugConsole", function(elem) {
+            elem.value += msg + "\n";
+        })    
+    }
 }
 
 
@@ -196,6 +211,15 @@ function lerp(start, end, t) {
     return (1-t)*start + t*end;
 }
 
+function onDebug() {
+    var consoleDiv = document.createElement('div');
+    consoleDiv.innerHTML = "<textarea disabled id=\"debugConsole\"></textarea>";
+    document.body.appendChild(consoleDiv);
+}
+
+if (DEBUG){
+    onDebug();
+}
 document.getElementById("start").addEventListener("click", startButtonClick);
 document.getElementById("pause").addEventListener("click", pauseButtonClick);
 document.getElementById("stop").addEventListener("click", stopButtonClick);
