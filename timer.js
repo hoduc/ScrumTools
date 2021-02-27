@@ -8,12 +8,15 @@ var bleep_sound = new howler.Howl({
     src: ['bleep.mp3']
 });
 
+var startColorArray = rgbToColorArray("rgb(49, 28, 19)");
+var endColorArray = rgbToColorArray("rgb(246, 111, 111)");
+var secondsCounter = null;
+
 function startButtonClick() {
     disableClockSelectors();
     let curMinValue = document.getElementById("m").value || 0;
     let curSecValue = document.getElementById("s").value || 0;
     addToDebug("start clock with timeValues:" + curMinValue + ":" + curSecValue);
-    timer = new Timer();
     timer.addEventListener('targetAchieved', function (e) {
         var messageSpan = document.getElementById("messageSpan");
         messageSpan.innerHTML = "Time's up";
@@ -21,15 +24,29 @@ function startButtonClick() {
         messageDiv.classList.remove("hide");        
     });
 
-    timer.addEventListener('secondsUpdated', function (e) {
-        bleep_sound.play();
-        document.getElementById("timerBox").innerHTML = timerValuemmss();    
+    timer.addEventListener('secondsUpdated', function (e) {        
+        // TODO: Add debug. For now temporarily mute
+        // bleep_sound.play();
+        let currentSecondCounter = e.detail.timer.getTotalTimeValues().seconds;
+        let elapsedSeconds = secondsCounter - currentSecondCounter || 1;
+        let factor = elapsedSeconds / secondsCounter;
+        let color = lerpc(startColorArray, endColorArray, factor);
+        addToDebug("elpasedSeconds:" + elapsedSeconds + "/ factor:" + factor + "/color:" + color + "/colors:" + colorArrayToRgb(color));
+        var timerBox = document.getElementById("timerBox");
+        timerBox.innerHTML = timerValuemmss();
+        timerBox.style.color = colorArrayToRgb(color);       
+    });
+
+    timer.addEventListener('started', function(e) {
+        if (secondsCounter == null) {
+            secondsCounter =  e.detail.timer.getTotalTimeValues().seconds;
+        }
     });
 
     timer.start({countdown: true, startValues: {
         minutes: parseInt(curMinValue, 10),
         seconds: parseInt(curSecValue, 10)
-    }});
+    }});    
 }
 
 function rangeCalcButtonClick() {
@@ -64,12 +81,14 @@ function prependZeroOnSingleDigit(value) {
 function stopButtonClick() {
     enableClockSelectors();
     timer.stop();
+    secondsCounter = null;
     addToDebug("Stopping timer at current timeValues:" + timerValuemmss());
 }
 
 function resetButtonClick() {
     enableClockSelectors();
     timer.reset();
+    secondsCounter == null;
     addToDebug("Reset timer to timeValues:" + timerValuemmss());
 }
 
@@ -152,6 +171,29 @@ function inspoButtonClick() {
 function addToDebug(msg) {
     var textArea = document.getElementById("debugConsole");
     textArea.value += msg + "\n";
+}
+
+
+// rgb(0,0,0)
+function rgbToColorArray(rgb) {
+    return rgb.split("(")[1].split(")")[0].split(",").map(Number);
+}
+
+function colorArrayToRgb(c) {
+    return "rgb(" + c.join(",") + ")";
+}
+
+// c1, c2 array converted from rgbToColorArray
+function lerpc(c1, c2, t) {
+    var lerpedColor = []
+    for(var i = 0; i < 3; i++) {
+        lerpedColor.push(Math.round(lerp(c1[i], c2[i], t)));
+    }
+    return lerpedColor;
+}
+
+function lerp(start, end, t) {
+    return (1-t)*start + t*end;
 }
 
 document.getElementById("start").addEventListener("click", startButtonClick);

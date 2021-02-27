@@ -7,6 +7,7 @@ textarea {
     overflow-y:scroll;
     resize: none;
     height: 100px;
+    width: 100%;
 }
 
 .hide {
@@ -58,7 +59,7 @@ textarea {
 
 #timerBox {
     font-family: 'Orbitron', sans-serif;
-    color: darkorange;
+    color: rgb(49,28,19);
     font-size: 800%;
 }
 
