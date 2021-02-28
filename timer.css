@@ -3,10 +3,6 @@ body {
     overflow-y: hidden;
 }
 
-#debug {
-    display: none;
-}
-
 textarea {
     overflow-y:scroll;
     resize: none;

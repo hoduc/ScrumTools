@@ -7,7 +7,8 @@ var DEBUG = require('electron').remote.process.argv.slice(-1)[0] == "debug" || f
 
 var timer = new Timer();
 var bleep_sound = new howler.Howl({
-    src: ['bleep.mp3']
+    src: ['bleep.mp3'],
+    loop: true
 });
 
 var startColorArray = rgbToColorArray("rgb(49, 28, 19)");
@@ -23,12 +24,11 @@ function startButtonClick() {
         var messageSpan = document.getElementById("messageSpan");
         messageSpan.innerHTML = "Time's up";
         var messageDiv = document.getElementById("messages");
-        messageDiv.classList.remove("hide");      
+        messageDiv.classList.remove("hide");
     });
 
-    timer.addEventListener('secondsUpdated', function (e) {        
-        // TODO: Add debug. For now temporarily mute
-        // bleep_sound.play();
+    timer.addEventListener('secondsUpdated', function (e) {       
+        bleep_sound.play();
         let currentSecondCounter = e.detail.timer.getTotalTimeValues().seconds;
         let elapsedSeconds = secondsCounter - currentSecondCounter || 1;
         let factor = elapsedSeconds / secondsCounter;
@@ -36,7 +36,7 @@ function startButtonClick() {
         addToDebug("elpasedSeconds:" + elapsedSeconds + "/ factor:" + factor + "/color:" + color + "/colors:" + colorArrayToRgb(color));
         var timerBox = document.getElementById("timerBox");
         timerBox.innerHTML = timerValuemmss();
-        timerBox.style.color = colorArrayToRgb(color);       
+        timerBox.style.color = colorArrayToRgb(color);
     });
 
     timer.addEventListener('started', function(e) {
@@ -48,7 +48,7 @@ function startButtonClick() {
     timer.start({countdown: true, startValues: {
         minutes: parseInt(curMinValue, 10),
         seconds: parseInt(curSecValue, 10)
-    }});    
+    }});
 }
 
 function rangeCalcButtonClick() {
@@ -66,7 +66,7 @@ function rangeCalcButtonClick() {
     addToDebug("minutes diff:" + minutesDiff);
     addToDebug("seconds diff:" + secondsDiff);
     m.value = minutesDiff;
-    s.value = secondsDiff;  
+    s.value = secondsDiff;
 }
 
 function timerValuemmss() {
@@ -76,7 +76,7 @@ function timerValuemmss() {
     return minutes + ":" + seconds;
 }
 
-function prependZeroOnSingleDigit(value) {    
+function prependZeroOnSingleDigit(value) {
     return value < 10 ? "0" + value : value;
 }
 
@@ -104,8 +104,6 @@ function pauseButtonClick() {
             addToDebug("pause timer at current timeValues:" + timerValuemmss());
         }
     }
-    
-    
 }
 
 
@@ -144,7 +142,7 @@ function resetClockSelectors() {
 function disableElem(inputId, disableState = true) {
     findElemByIdAndInvoke(inputId, function(elem){
         addToDebug(inputId + "to be:" + disableState);
-        elem.disabled =disableState;
+        elem.disabled = disableState;
     });
 
 }
@@ -163,8 +161,8 @@ function findElemByIdAndInvoke(inputId, onElem) {
 
 function inspoButtonClick() {
     request('https://quotes.rest/qod?category=inspire', { json: true }, (err, res, body) => {
-        if (err) { 
-            return console.log(err); 
+        if (err) {
+            return console.log(err);
         }
         console.log(body);
         var q_html = ""
@@ -176,16 +174,20 @@ function inspoButtonClick() {
         var quoteContent = document.getElementById("quoteContent");
         quoteContent.innerHTML = q_html + "<br/> ( Source:https://theysaidso.com ) <br />";
         quoteContent.classList.remove("hide");
-        
+
     });
 }
 
+function muteSoundClick(e) {
+    shouldMute = e.currentTarget.checked;
+    addToDebug("muteSoundStatus:" + shouldMute);
+    bleep_sound.mute(shouldMute);
+}
+
 function addToDebug(msg) {
-    if (DEBUG) {
-        findElemByIdAndInvoke("debugConsole", function(elem) {
-            elem.value += msg + "\n";
-        })    
-    }
+    findElemByIdAndInvoke("debugConsole", function(elem) {
+        elem.value += msg + "\n";
+    });
 }
 
 
@@ -220,6 +222,7 @@ function onDebug() {
 if (DEBUG){
     onDebug();
 }
+
 document.getElementById("start").addEventListener("click", startButtonClick);
 document.getElementById("pause").addEventListener("click", pauseButtonClick);
 document.getElementById("stop").addEventListener("click", stopButtonClick);
@@ -227,3 +230,4 @@ document.getElementById("reset").addEventListener("click", resetButtonClick);
 document.getElementById("standup").addEventListener("click", standupButtonClick);
 document.getElementById("inspo").addEventListener("click", inspoButtonClick);
 document.getElementById("rangeCalc").addEventListener("click", rangeCalcButtonClick);
+document.getElementById("muteSoundCheckBox").addEventListener("click", muteSoundClick);
