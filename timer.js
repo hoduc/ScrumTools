@@ -1,4 +1,5 @@
 
+const { ipcRenderer } = require('electron');
 const request = require('request');
 const i18next = require('i18next');
 const HttpApi = require('i18next-http-backend');
@@ -18,7 +19,7 @@ function getLang(processArgv) {
     }
     // npm start vi
     if (processArgv.length == 3 && lastArgv != "debug") {
-        return lastArgv;  
+        return lastArgv;
     }
     // npm start vi debug
     return processArgv[processArgv.length - 2];
@@ -66,7 +67,7 @@ function startButtonClick() {
         messageDiv.classList.remove("hide");
     });
 
-    timer.addEventListener('secondsUpdated', function (e) {       
+    timer.addEventListener('secondsUpdated', function (e) {
         bleep_sound.play();
         let currentSecondCounter = e.detail.timer.getTotalTimeValues().seconds;
         let elapsedSeconds = secondsCounter - currentSecondCounter || 1;
@@ -276,21 +277,29 @@ document.getElementById("inspo").addEventListener("click", inspoButtonClick);
 document.getElementById("rangeCalc").addEventListener("click", rangeCalcButtonClick);
 document.getElementById("muteSoundCheckBox").addEventListener("click", muteSoundClick);
 
+
 // https://github.com/i18next/i18next-http-backend
-i18next.use(HttpApi).init({    
+i18next.use(HttpApi).init({
     debug: DEBUG,
     lng: lang,
     fallbackLng: 'en',
-    backend: {  
+    backend: {
         loadPath:  './locales/{{lng}}/{{ns}}.json'
     }
 }, function(err, t) {
     if (DEBUG && err) {
         console.log("Got err:" + err);
-    } 
+    }
     transElemIds.forEach(function(elemId){
         findElemByIdAndInvoke(elemId, function(elem) {
             elem.innerHTML = i18next.t(elemId)
         })
-    });        
+    });
+
+    // send message for main process to show the windows
+    // https://www.electronjs.org/docs/api/ipc-main
+    ipcRenderer.send("finished-rendering", "finished-rendering");
+    if (DEBUG) {
+        console.log("sent finished rendering messages");
+    }
 });
