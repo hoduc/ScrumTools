@@ -5,43 +5,43 @@
     <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
     <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">
-    <title>Doc Ho Scrum Tools(DHST)</title>
+    <title id="title"></title>
   </head>
   <body>
     <div id="timer">
       <div id="timerSelectBox">
         <input id="m" type="number" min="0" max="24" placeholder="0"/>
-        <span>Minutes</span>
+        <span id="minLabel"></span>
         <input id="s" type="number" min="0" max="59" placeholder="0"/>
-        <span>Seconds</span>
+        <span id="secLabel"></span>
       </div>
       <div>
       <div id="buttons">
-        <button id="start">Start</button>
-        <button id="pause">Pause</button>
-        <button id="stop">Stop</button>
-        <button id="reset">Reset</button>
-        <button id="standup">Standup(3 minutes)</button>
-        <input type="checkbox" id="muteSoundCheckBox" />Mute
+        <button id="start"></button>
+        <button id="pause"></button>
+        <button id="stop"></button>
+        <button id="reset"></button>
+        <button id="standup"></button>
+        <input type="checkbox" id="muteSoundCheckBox" /><span id="muteSoundCheckBoxLabel"></span>
         <div id="calculator">
           <div id="fromCalculator" class="left">
             <!-- <input id="h1" type="number" min="0" max="24" placeholder="0"/> -->
             <!-- <span>Hour</span> -->
             <input id="m1" type="number" min="0" max="24" placeholder="0"/>
-            <span>Minutes</span>
+            <span id="minRange1Label"></span>
             <input id="s1" type="number" min="0" max="59" placeholder="0"/>
-            <span>Seconds</span>
+            <span id="secRange1Label"></span>
           </div>
           <div id="toCalculator" class="right">
             <!-- <input id="h2" type="number" min="0" max="24" placeholder="0"/> -->
             <!-- <span>Hour</span> -->
             <input id="m2" type="number" min="0" max="24" placeholder="0"/>
-            <span>Minutes</span>
+            <span id="minRange2Label"></span>
             <input id="s2" type="number" min="0" max="59" placeholder="0"/>
-            <span>Seconds</span>
+            <span id="secRange2Label"></span>
           </div>
           <span class="right">
-            <button id="rangeCalc">Calculate Range!!!</button>
+            <button id="rangeCalc"></button>
           </span>
         </div>
       </div>
@@ -50,7 +50,7 @@
 
     <hr>
     <div id="qotd">
-      <button id="inspo">Inspire Quote!</button>
+      <button id="inspo"></button>
       <p class="blockquote hide" id="quoteContent"></p>
     </div>
 
@@ -64,7 +64,7 @@
 
     <div id="about">
       <span>
-        <small>This is about. TBU</small>
+        <small id="about-section"></small>
       </span>
     </div>
 

@@ -1,0 +1,18 @@
+{
+    "title": "Duc Ho Scrum Tools(DHST)",
+    "about-section": "This is about. TBU",
+    "minLabel": "Minutes",
+    "secLabel": "Seconds",
+    "start": "Start",
+    "pause": "Pause",
+    "stop": "Stop",
+    "reset": "Reset",
+    "standup": "Standup(3 minutes)",
+    "minRange1Label": "Minutes",
+    "secRange1Label": "Seconds",
+    "minRange2Label": "Minutes",
+    "secRange2Label": "Seconds",
+    "rangeCalc": "Calculate Range!!!",
+    "inspo": "Inspire Quote!",
+    "muteSoundCheckBoxLabel": "Mute"
+}

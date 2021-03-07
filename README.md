@@ -4,7 +4,20 @@ All in one stop shop for use when i put on scrum master hat.
 
 bleep.mp3 : http://soundbible.com/1252-Bleep.html Recorded by Mike Koenig
 
+## Commands
 
+Run in any languages:
+
+> npm start vi
+
+To Debug , pass "debug" last:
+
+> npm start vi debug
+
+Default to 'en' lang if not passing:
+
+> npm start
+> npm start debug
 ## Resources for Learning Electron
 
 - [electronjs.org/docs](https://electronjs.org/docs) - all of Electron's documentation

@@ -26,6 +26,8 @@
     "easytimer.js": "^4.3.0",
     "howler": "^2.2.1",
     "https": "^1.0.0",
+    "i18next": "^19.9.1",
+    "i18next-http-backend": "^1.1.1",
     "request": "^2.88.2"
   }
 }

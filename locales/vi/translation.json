@@ -1,0 +1,18 @@
+{
+    "title": "Công cụ Scrum của Đức Hồ",
+    "about-section": "Giới thiệu",
+    "minLabel": "Phút",
+    "secLabel": "Giây",
+    "start": "Chạy",
+    "pause": "Nghỉ",
+    "stop": "Dừng",
+    "reset": "Lại",
+    "standup": "Báo cáo(3 phút)",
+    "minRange1Label": "Phút",
+    "secRange1Label": "Giây",
+    "minRange2Label": "Phút",
+    "secRange2Label": "Giây",
+    "rangeCalc": "Tính giữa khoảng!!!",
+    "inspo": "Câu nói truyền cảm hứng!",
+    "muteSoundCheckBoxLabel": "Tắt tiếng đồng hồ"
+}

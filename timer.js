@@ -1,9 +1,48 @@
 
 const request = require('request');
+const i18next = require('i18next');
+const HttpApi = require('i18next-http-backend');
+const electronRemote = require('electron').remote;
+const processArgv = electronRemote.process.argv;
 var { Timer } = require('easytimer.js');
 var howler = require('howler');
 
-var DEBUG = require('electron').remote.process.argv.slice(-1)[0] == "debug" || false;
+var DEBUG = processArgv[processArgv.length - 1] == "debug" || false;
+var lang = getLang(processArgv);
+
+function getLang(processArgv) {
+    let lastArgv = processArgv[processArgv.length - 1];
+    // npm start | npm start debug
+    if (processArgv.length == 2 || (processArgv.length == 3 && lastArgv == "debug")){
+        return 'en';
+    }
+    // npm start vi
+    if (processArgv.length == 3 && lastArgv != "debug") {
+        return lastArgv;  
+    }
+    // npm start vi debug
+    return processArgv[processArgv.length - 2];
+}
+
+
+let transElemIds = [
+    "title",
+    "about-section",
+    "minLabel",
+    "secLabel",
+    "start",
+    "pause",
+    "stop",
+    "reset",
+    "standup",
+    "minRange1Label",
+    "secRange1Label",
+    "minRange2Label",
+    "secRange2Label",
+    "rangeCalc",
+    "inspo",
+    "muteSoundCheckBoxLabel"
+];
 
 var timer = new Timer();
 var bleep_sound = new howler.Howl({
@@ -221,6 +260,11 @@ function onDebug() {
 
 if (DEBUG){
     onDebug();
+    addToDebug("argv:" + processArgv.length + "=>[" + processArgv + "]");
+    addToDebug("argv.slec(-1):" + processArgv.slice(-1));
+    addToDebug("last[-1]:" + processArgv[-1]);
+    addToDebug("last:" + processArgv[processArgv.length - 1]);
+    addToDebug("Picking lang:" + lang);
 }
 
 document.getElementById("start").addEventListener("click", startButtonClick);
@@ -231,3 +275,22 @@ document.getElementById("standup").addEventListener("click", standupButtonClick)
 document.getElementById("inspo").addEventListener("click", inspoButtonClick);
 document.getElementById("rangeCalc").addEventListener("click", rangeCalcButtonClick);
 document.getElementById("muteSoundCheckBox").addEventListener("click", muteSoundClick);
+
+// https://github.com/i18next/i18next-http-backend
+i18next.use(HttpApi).init({    
+    debug: DEBUG,
+    lng: lang,
+    fallbackLng: 'en',
+    backend: {  
+        loadPath:  './locales/{{lng}}/{{ns}}.json'
+    }
+}, function(err, t) {
+    if (DEBUG && err) {
+        console.log("Got err:" + err);
+    } 
+    transElemIds.forEach(function(elemId){
+        findElemByIdAndInvoke(elemId, function(elem) {
+            elem.innerHTML = i18next.t(elemId)
+        })
+    });        
+});
