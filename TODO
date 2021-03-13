@@ -10,7 +10,7 @@
 ☐ Count down clock. Frameless windows with clock shape. button over lay on clock
 ✔ Color interpolation faded as time goes by. Red and flashes as it approaching 0, also display message when it is nearly 0 @done(21-02-26 22:31)
 ✔ Fix range calculation abs @done(21-02-20 22:01)
-☐ Input minutes, seconds cap/validation on entering number from keyboard
+✔ Input minutes, seconds cap/validation on entering number from keyboard @started(21-03-12 21:12) @done(21-03-12 22:25) @lasted(1h13m10s)
 ☐ Read Range calculation from csv, row input
 ✔ Better debug: pass debug params from npm start to drive layout @started(21-02-27 12:22) @done(21-02-27 13:31) @lasted(1h9m48s)
 ☐ Tweak interpolation factor to maybe indicate to audience that time is running out
@@ -19,3 +19,4 @@
 ✔ Fix the flash between translation in the beginning @started(21-03-07 13:27) @done(21-03-07 14:13) @lasted(46m24s)
 ☐ Figure out a way to reference same word different labels translation
 ☐ Figure out the definition of DEBUG. When is console log. When is adding to debug text area?
+☐ Debug text area filter by log level.

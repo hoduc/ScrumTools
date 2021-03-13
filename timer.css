@@ -53,6 +53,10 @@ textarea {
     display: inline;
 }
 
+.timeinput {
+    width: 20%;
+}
+
 #timerSelectBox {
     font-family: 'Orbitron', sans-serif;
 }

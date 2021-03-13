@@ -10,9 +10,9 @@
   <body>
     <div id="timer">
       <div id="timerSelectBox">
-        <input id="m" type="number" min="0" max="24" placeholder="0"/>
+        <input id="m" class="timeinput" type="text" min="0" max="24" maxlength="2" placeholder="0" inputmode="numeric"/>
         <span id="minLabel"></span>
-        <input id="s" type="number" min="0" max="59" placeholder="0"/>
+        <input id="s" class="timeinput" type="text" min="0" max="59" maxlength="2" placeholder="0" inputmode="numeric"/>
         <span id="secLabel"></span>
       </div>
       <div>
@@ -27,17 +27,17 @@
           <div id="fromCalculator" class="left">
             <!-- <input id="h1" type="number" min="0" max="24" placeholder="0"/> -->
             <!-- <span>Hour</span> -->
-            <input id="m1" type="number" min="0" max="24" placeholder="0"/>
+            <input id="m1" class="timeinput" type="number" min="0" max="24" maxlength="2" placeholder="0"/>
             <span id="minRange1Label"></span>
-            <input id="s1" type="number" min="0" max="59" placeholder="0"/>
+            <input id="s1" class="timeinput" type="number" min="0" max="59" maxlength="2" placeholder="0"/>
             <span id="secRange1Label"></span>
           </div>
           <div id="toCalculator" class="right">
             <!-- <input id="h2" type="number" min="0" max="24" placeholder="0"/> -->
             <!-- <span>Hour</span> -->
-            <input id="m2" type="number" min="0" max="24" placeholder="0"/>
+            <input id="m2" class="timeinput" type="text" min="0" max="24" maxlength="2" placeholder="0" inputmode="numeric"/>
             <span id="minRange2Label"></span>
-            <input id="s2" type="number" min="0" max="59" placeholder="0"/>
+            <input id="s2" class="timeinput" type="text" min="0" max="59" maxlength="2" placeholder="0" inputmode="numeric"/>
             <span id="secRange2Label"></span>
           </div>
           <span class="right">
