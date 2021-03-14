@@ -20,4 +20,4 @@
 ✔ Figure out a way to reference same word different labels translation. @started(21-03-13 17:10) @done(21-03-13 17:32) @lasted(22m49s)
 ☐ Figure out the definition of DEBUG. When is console log. When is adding to debug text area?
 ☐ Debug text area filter by log level.
-☐ Fix sound stil playing even when on mute and pause/stop clock
+✔ Fix sound stil playing even when on mute and pause/stop clock @started(21-03-13 23:52) @done(21-03-14 00:43) @lasted(51m53s)

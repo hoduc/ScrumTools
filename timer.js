@@ -123,6 +123,7 @@ function prependZeroOnSingleDigit(value) {
 function stopButtonClick() {
     enableClockSelectors();
     timer.stop();
+    bleep_sound.stop();
     secondsCounter = null;
     addToDebug("Stopping timer at current timeValues:" + timerValuemmss());
 }
@@ -138,9 +139,11 @@ function pauseButtonClick() {
     if (timer) {
         if (!timer.isRunning()) {
             timer.start();
+            bleep_sound.play();                  
             addToDebug("Resume timer at current timeValues:" + timerValuemmss());
         } else {
             timer.pause();
+            bleep_sound.pause();
             addToDebug("pause timer at current timeValues:" + timerValuemmss());
         }
     }
