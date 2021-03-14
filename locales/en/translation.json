@@ -8,10 +8,6 @@
     "stop": "Stop",
     "reset": "Reset",
     "standup": "Standup(3 minutes)",
-    "minRange1Label": "Minutes",
-    "secRange1Label": "Seconds",
-    "minRange2Label": "Minutes",
-    "secRange2Label": "Seconds",
     "rangeCalc": "Calculate Range!!!",
     "inspo": "Inspire Quote!",
     "muteSoundCheckBoxLabel": "Mute"

@@ -17,7 +17,9 @@ To Debug , pass "debug" last:
 Default to 'en' lang if not passing:
 
 > npm start
+
 > npm start debug
+
 ## Resources for Learning Electron
 
 - [electronjs.org/docs](https://electronjs.org/docs) - all of Electron's documentation

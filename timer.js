@@ -292,7 +292,8 @@ i18next.use(HttpApi).init({
     }
     transElemIds.forEach(function(elemId){
         findElemByIdAndInvoke(elemId, function(elem) {
-            elem.innerHTML = i18next.t(elemId)
+            let translationKey = elem.dataset.i18n || elemId;
+            elem.innerHTML = i18next.t(translationKey)        ;   
         })
     });
 

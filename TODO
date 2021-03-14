@@ -17,6 +17,7 @@
 ✔ Option to mute sound @started(21-02-27 18:52) @done(21-02-27 19:15) @lasted(23m8s)
 ☐ Refactor addEventListerner onclick to grab the content from the passed into element instead of query the element again
 ✔ Fix the flash between translation in the beginning @started(21-03-07 13:27) @done(21-03-07 14:13) @lasted(46m24s)
-☐ Figure out a way to reference same word different labels translation
+✔ Figure out a way to reference same word different labels translation. @started(21-03-13 17:10) @done(21-03-13 17:32) @lasted(22m49s)
 ☐ Figure out the definition of DEBUG. When is console log. When is adding to debug text area?
 ☐ Debug text area filter by log level.
+☐ Fix sound stil playing even when on mute and pause/stop clock
