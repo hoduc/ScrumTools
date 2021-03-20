@@ -55,15 +55,36 @@ var startColorArray = rgbToColorArray("rgb(49, 28, 19)");
 var endColorArray = rgbToColorArray("rgb(246, 111, 111)");
 var secondsCounter = null;
 
+var domStore = {
+    "start"             : document.getElementById("start"),
+    "pause"             : document.getElementById("pause"),
+    "stop"              : document.getElementById("stop"),
+    "reset"             : document.getElementById("reset"),
+    "standup"           : document.getElementById("standup"),
+    "inspo"             : document.getElementById("inspo"),
+    "rangeCalc"         : document.getElementById("rangeCalc"),
+    "muteSoundCheckBox" : document.getElementById("muteSoundCheckBox"),
+    "m"                 : document.getElementById("m"),
+    "s"                 : document.getElementById("s"),    
+    "m2"                : document.getElementById("m2"),
+    "m1"                : document.getElementById("m1"),
+    "s2"                : document.getElementById("s2"),
+    "s1"                : document.getElementById("s1"),
+    "messageSpan"       : document.getElementById("messageSpan"),
+    "messages"          : document.getElementById("messages"),
+    "timerBox"          : document.getElementById("timerBox")
+}
+
+
 function startButtonClick() {
     disableClockSelectors();
-    let curMinValue = document.getElementById("m").value || 0;
-    let curSecValue = document.getElementById("s").value || 0;
+    let curMinValue = domStore["m"].value || 0;
+    let curSecValue = domStore["s"].value || 0;
     addToDebug("start clock with timeValues:" + curMinValue + ":" + curSecValue);
     timer.addEventListener('targetAchieved', function (e) {
-        var messageSpan = document.getElementById("messageSpan");
+        var messageSpan = domStore["messageSpan"];
         messageSpan.innerHTML = "Time's up";
-        var messageDiv = document.getElementById("messages");
+        var messageDiv = domStore["messages"];
         messageDiv.classList.remove("hide");
     });
 
@@ -74,7 +95,7 @@ function startButtonClick() {
         let factor = elapsedSeconds / secondsCounter;
         let color = lerpc(startColorArray, endColorArray, factor);
         addToDebug("elpasedSeconds:" + elapsedSeconds + "/ factor:" + factor + "/color:" + color + "/colors:" + colorArrayToRgb(color));
-        var timerBox = document.getElementById("timerBox");
+        var timerBox = domStore["timerBox"];
         timerBox.innerHTML = timerValuemmss();
         timerBox.style.color = colorArrayToRgb(color);
     });
@@ -92,12 +113,12 @@ function startButtonClick() {
 }
 
 function rangeCalcButtonClick() {
-    var m = document.getElementById("m");
-    var s = document.getElementById("s");
-    var m2 = document.getElementById("m2").value || 0;
-    var m1 = document.getElementById("m1").value || 0 ;
-    var s2 = document.getElementById("s2").value || 0;
-    var s1 = document.getElementById("s1").value || 0;
+    var m = domStore["m"];
+    var s = domStore["s"];
+    var m2 = domStore["m2"].value || 0;
+    var m1 = domStore["m1"].value || 0 ;
+    var s2 = domStore["s2"].value || 0;
+    var s1 = domStore["s1"].value || 0;
     // TODO: validation
     var minutesDiff = Math.abs(parseInt(m2, 10) - parseInt(m1, 10));
     var secondsDiff = Math.abs(parseInt(s2, 10) - parseInt(s1, 10));
@@ -151,8 +172,8 @@ function pauseButtonClick() {
 
 
 function standupButtonClick() {
-    var minInput = document.getElementById("m");
-    var secInput = document.getElementById("s");
+    var minInput = domStore["m"];
+    var secInput = domStore["s"];
     minInput.value = 3;
     secInput.value = 0;
     let curMinValue = minInput.value || 0;
@@ -176,9 +197,9 @@ function enableClockSelectors() {
 }
 
 function resetClockSelectors() {
-    var minuteInput = document.getElementById("m");
+    var minuteInput = domStore["m"];
     minuteInput.value = minuteInput.getAttribute("placeholder");
-    var secInput = document.getElementById("s");
+    var secInput = domStore["s"];
     secInput.value = secInput.getAttribute("placeholder");
 }
 
@@ -195,7 +216,8 @@ function enableElem(inputId) {
 }
 
 function findElemByIdAndInvoke(inputId, onElem) {
-    var elem = document.getElementById(inputId);
+    console.log("the domstore:" + inputId + ":" + domStore[inputId]);
+    var elem = domStore[inputId] || document.getElementById(inputId);
     if (elem) {
         onElem(elem);
     }
@@ -214,10 +236,10 @@ function inspoButtonClick() {
             console.log("elem:" + element);
             q_html += element.quote + "-" + element.author;
         });
-        var quoteContent = document.getElementById("quoteContent");
-        quoteContent.innerHTML = q_html + "<br/> ( Source:https://theysaidso.com ) <br />";
-        quoteContent.classList.remove("hide");
-
+        findElemByIdAndInvoke("quoteContent", function(quoteContent){
+            quoteContent.innerHTML = q_html + "<br/> ( Source:https://theysaidso.com ) <br />";
+            quoteContent.classList.remove("hide");
+        });        
     });
 }
 
@@ -271,14 +293,14 @@ if (DEBUG){
     addToDebug("Picking lang:" + lang);
 }
 
-document.getElementById("start").addEventListener("click", startButtonClick);
-document.getElementById("pause").addEventListener("click", pauseButtonClick);
-document.getElementById("stop").addEventListener("click", stopButtonClick);
-document.getElementById("reset").addEventListener("click", resetButtonClick);
-document.getElementById("standup").addEventListener("click", standupButtonClick);
-document.getElementById("inspo").addEventListener("click", inspoButtonClick);
-document.getElementById("rangeCalc").addEventListener("click", rangeCalcButtonClick);
-document.getElementById("muteSoundCheckBox").addEventListener("click", muteSoundClick);
+domStore["start"].addEventListener("click", startButtonClick);
+domStore["pause"].addEventListener("click", pauseButtonClick);
+domStore["stop"].addEventListener("click", stopButtonClick);
+domStore["reset"].addEventListener("click", resetButtonClick);
+domStore["standup"].addEventListener("click", standupButtonClick);
+domStore["inspo"].addEventListener("click", inspoButtonClick);
+domStore["rangeCalc"].addEventListener("click", rangeCalcButtonClick);
+domStore["muteSoundCheckBox"].addEventListener("click", muteSoundClick);
 
 
 // https://github.com/i18next/i18next-http-backend
