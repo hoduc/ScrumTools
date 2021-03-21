@@ -1,5 +1,5 @@
 // Modules to control application life and create native browser window
-const {app, BrowserWindow, screen, ipcMain} = require('electron')
+const {app, Menu, BrowserWindow, screen, ipcMain} = require('electron')
 const path = require('path')
 
 var DEBUG = process.argv.slice(-1)[0] == "debug" || false;
@@ -37,8 +37,16 @@ function createWindow () {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
+  const menu = Menu.buildFromTemplate([
+    {
+        label: app.name,
+        submenu: [
+                {role: 'about'}            
+          ]
+    }
+  ]);
+  Menu.setApplicationMenu(menu);
   createWindow()
-
   app.on('activate', function () {
     // On macOS it's common to re-create a window in the app when the
     // dock icon is clicked and there are no other windows open.
