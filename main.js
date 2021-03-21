@@ -39,10 +39,31 @@ function createWindow () {
 app.whenReady().then(() => {
   const menu = Menu.buildFromTemplate([
     {
-        label: app.name,
-        submenu: [
-                {role: 'about'}            
-          ]
+        label: 'About',
+        click: (menuItem, window, e) => {
+          // TODO : refactor creating window in a function         
+          const mousePoint = screen.getCursorScreenPoint();
+          const display = screen.getDisplayNearestPoint(mousePoint);         
+          let aboutWindow = new BrowserWindow({
+            width: 250,
+            height: 200,
+            x: display.bounds.x + display.size.width / 2,
+            y: display.bounds.y + display.size.height / 2,
+            webPreferences: {
+              nodeIntegration: true,
+              enableRemoteModule: true
+            },
+            parent: window,
+            resizable: false,
+            // movable: false,
+            fullscreenable: false,
+            modal: true
+          });
+          aboutWindow.removeMenu();
+          aboutWindow.loadFile('about.html');          
+          aboutWindow.show();
+        }          
+        
     }
   ]);
   Menu.setApplicationMenu(menu);
