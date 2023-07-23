@@ -18,9 +18,9 @@ function createWindow () {
     x: display.bounds.x + 50,
     y: display.bounds.y + 50,
     webPreferences: {
-      preload: path.join(__dirname, 'preload.js'),
-      nodeIntegration: true,
-      enableRemoteModule: true
+	preload: path.join(__dirname, 'preload.js'),
+	contextIsolation: false,
+	nodeIntegration: true
     },
     show: false
   });
@@ -49,10 +49,10 @@ app.whenReady().then(() => {
             height: 200,
             x: display.bounds.x + display.size.width / 2,
             y: display.bounds.y + display.size.height / 2,
-            webPreferences: {
-              nodeIntegration: true,
-              enableRemoteModule: true
-            },
+	    webPreferences: {
+		contextIsolation: false,
+		nodeIntegration: true
+	    },
             parent: window,
             resizable: false,
             // movable: false,

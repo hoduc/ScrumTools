@@ -1,17 +1,22 @@
 
-const { ipcRenderer } = require('electron');
+const { ipcRenderer, contextBridge } = require('electron');
 const request = require('request');
 const i18next = require('i18next');
 const HttpApi = require('i18next-http-backend');
-const electronRemote = require('electron').remote;
-const processArgv = electronRemote.process.argv;
+// const electronRemote = require('electron').remote;
+// const processArgv = electronRemote.process.argv;
+const processArgv = process.argv;
 var { Timer } = require('easytimer.js');
 var howler = require('howler');
 
-var DEBUG = processArgv[processArgv.length - 1] == "debug" || false;
+console.log("the-argv:" + processArgv);
+var DEBUG = false;//process.argv[process.argv.length - 1] == "debug" || false;
 var lang = getLang(processArgv);
 
+console.log("debug:" + DEBUG)
+
 function getLang(processArgv) {
+    console.log("hi:", processArgv);
     let lastArgv = processArgv[processArgv.length - 1];
     // npm start | npm start debug
     if (processArgv.length == 2 || (processArgv.length == 3 && lastArgv == "debug")){

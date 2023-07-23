@@ -20,7 +20,7 @@
   },
   "license": "CC0-1.0",
   "devDependencies": {
-    "electron": "^10.1.5"
+    "electron": "^12.2.3"
   },
   "dependencies": {
     "easytimer.js": "^4.3.0",
